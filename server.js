@@ -3,6 +3,8 @@
 
 	var port = process.env.PORT || 8080;
 
+	var db = require("./db.js");
+	var async = require('async');
 	var express = require("express");
 	var app = express();
 	var router = express.Router();
@@ -30,7 +32,13 @@
 
 	router.route('/viewAll')
 		.get(function (req, res) {
-			res.json("should return all devices");
+			// res.json("should return all devices");
+
+			db.get().query('SELECT * FROM test_crud', function(err, rows, fields) {
+			  if (err) throw err;
+			  res.json("data: " + JSON.stringify(rows));
+			});
+
 		});
 
 	router.route('/viewCritical')
@@ -38,11 +46,18 @@
 			res.json("should return critical devices only");
 		});
 
-
 	app.use('/', router);
 
-	app.listen(port);
-
-	console.log("server started");
+	// Connect to Server and MySQL on start
+	db.connect(db.MODE_TEST, function(err) {
+	  if (err) {
+	    console.log('Unable to connect to MySQL.');
+	    process.exit(1);
+	  } else {
+	    app.listen(port, function() {
+	      console.log('Listening on port ' + port + '...');
+	    });
+	  }
+	});
 
 }());
