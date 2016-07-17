@@ -6,15 +6,19 @@
 	var express = require("express");
 	var app = express();
 	var router = express.Router();
+	var bodyParser = require('body-parser');
 
+	app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.json());
 	app.use(express.static('public'));
 
-	app.get('/test', function (req, res) {
+	router.get('/', function (req, res) {
 		console.log("in test");
-
-		res.sendFile(__dirname + '/public/test.html');
+		res.json("json output");
+		//res.sendFile(__dirname + '/public/test.html');
 	});
 
+	// must add /test to every route now
 	app.use('/test', router);
 
 	app.listen(port);
