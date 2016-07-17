@@ -15,8 +15,8 @@ var state = {
 exports.connect = function(mode, done) {
   state.pool = mysql.createPool({
     host: 'localhost',
-    user: 'root',
-    password: 'password',
+    user: 'testuser',
+    password: 'test',
     database: mode === exports.MODE_PRODUCTION ? PRODUCTION_DB : TEST_DB
   });
 
@@ -47,7 +47,9 @@ exports.drop = function(tables, done) {
   var pool = state.pool;
   if (!pool) return done(new Error('Missing database connection.'));
 
-  async.each(tables, function(name, cb) {
-    pool.query('DELETE * FROM ' + name, cb);
+  console.log(tables);
+
+  async.each(tables, function(name) {
+    pool.query('DELETE * FROM ' + name + ';');
   }, done);
 };
