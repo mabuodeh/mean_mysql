@@ -18,6 +18,15 @@
 		//res.sendFile(__dirname + '/public/test.html');
 	});
 
+	router.route('/pg')
+		.get(function (req, res) {
+			res.json("pg json get");
+		})
+
+		.post(function (req, res) {
+			res.json("pg json post");
+		});
+
 	// must add /test to every route now
 	app.use('/test', router);
 
