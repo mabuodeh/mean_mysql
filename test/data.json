@@ -1,14 +1,8 @@
-var data = {
-  tables: {
-    test_crud: [
-     {id: 1, test_num: 33, test_string: "a string"},
-     {id: 2, test_num: 5, test_string: "asdf"},
+{"data" : {
+  "tables": {
+    "test_crud": [
+     {"id": 1, "test_num": 33, "test_string": "a string"},
+     {"id": 2, "test_num": 5, "test_string": "asdf"}
     ]
-    // ,
-    // cars: [
-    //   {id: 1, brand: "Jeep", model: "Cherokee", owner_id: 2},
-    //   {id: 2, brand: "BMW", model: "X5", owner_id: 2},
-    //   {id: 3, brand: "Volkswagen", model: "Polo", owner_id: 1},
-    // ],
-  },
-};
+  }
+}}
